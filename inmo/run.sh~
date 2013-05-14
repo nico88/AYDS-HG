@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "*******************  REINICIAR BD  *************************"
 mysql -u root -p inmoapp_development < config/schema.sql
 
 echo "*******************  BUILDING MODULE  *****************************************"

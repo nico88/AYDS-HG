@@ -14,7 +14,8 @@ import org.slf4j.LoggerFactory;
 	UserSpec.class, 
 	BuildingSpec.class, 
 	OwnerSpec.class,
-	RealEstateSpec.class
+	RealEstateSpec.class,
+	OwnersRealEstatesSpec.class
 })
 public class TestSuite {
 }

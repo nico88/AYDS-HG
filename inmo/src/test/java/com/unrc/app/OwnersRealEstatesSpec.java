@@ -1,6 +1,9 @@
 package com.unrc.app;
 
+import com.unrc.app.models.OwnersRealEstates;
+import com.unrc.app.models.Owner;
 import com.unrc.app.models.RealEstate;
+
 
 import org.javalite.activejdbc.Base;
 import org.junit.After;
@@ -9,23 +12,10 @@ import org.junit.Test;
 
 import static org.javalite.test.jspec.JSpec.the;
 
-public class RealEstateSpec{
-
-    @Before
-    public void before(){
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/inmoapp_development", "root", "");
-        Base.openTransaction();
-    }
-
-    @After
-    public void after(){
-        Base.rollbackTransaction();
-        Base.close();
-    }
-
+public class OwnersRealEstatesSpec{
     @Test
     public void shouldValidateMandatoryFields(){
-
+/*
         RealEstate realestate = new RealEstate();
 
         //check errors
@@ -43,5 +33,5 @@ public class RealEstateSpec{
 		
         //all is good:
         the(realestate).shouldBe("valid");
-    }
+*/    }
 }
