@@ -1,3 +1,5 @@
+clear 
+
 mvn dependency:copy-dependencies
 export CLASPATH=""
 for file in `ls target/dependency`; do export CLASSPATH=$CLASSPATH:target/dependency/$file; done

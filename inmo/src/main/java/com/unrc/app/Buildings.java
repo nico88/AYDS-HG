@@ -1,96 +1,97 @@
 package com.unrc.app;
 
-import com.unrc.app.models.RealEstate;
+import com.unrc.app.models.Building;
 import com.unrc.app.models.Owner;
 
 import org.javalite.activejdbc.Base;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Owners {
-    public static void add(
-		String first_name, 
-		String last_name, 
-		String city, 
-		String street, 
-		String neighborhood, 
-		String email)
-    {
-		Owner owner = new Owner();
-		
-        owner.set("first_name", first_name);
-        owner.set("last_name", last_name);
-        owner.set("city", city);
-        owner.set("street", street);
-        owner.set("neighborhood",neighborhood);
-		owner.set("email",email);		
-		
-		owner.saveIt();
-
-//		System.out.println(owner.get("id"));
-//		System.out.println(owner.get("id").getClass());
-    }
-    
-    public static void delete(int id){
-		Owner owner = new Owner();
-		owner = owner.findById(id);
-		
-		owner.delete();
-    }
-    
-    public static void modify (
-        int    id,
-		String first_name, 
-		String last_name, 
-		String city, 
-		String street, 
-		String neighborhood, 
-		String email)
-	{
-		Owner owner = new Owner();
-		owner = owner.findById(id);
-		
-        owner.set("first_name", first_name);
-        owner.set("last_name", last_name);
-        owner.set("city", city);
-        owner.set("street", street);
-        owner.set("neighborhood",neighborhood);
-		owner.set("email",email);		
-		
-		owner.saveIt();		
-		
-		System.out.println(owner.get("id"));
-    }
- 
-	private static boolean addRemoveRE(int id, int r_id, boolean add){
+public class Buildings {
+	
+    public static int add(
+		String type, 
+		String city,
+		String street,
+		String neighborhood,
+		String description,
+		int price,
+		String operation,
+		int id_owner
+    ){
 		Owner o = new Owner();
-		o = o.findById(id);
+		o = o.findById(id_owner);
 		
-		if (o != null){
-			RealEstate r = new RealEstate();
-			r = r.findById(r_id);
+		if (o == null){
+			throw new IllegalArgumentException("Ingreso un ID de Owner no válido.");
+		}
+		
+		Building b = new Building();
+		b.set("type",type);
+		b.set("city",city);
+		b.set("street",street);
+		b.set("neighborhood",neighborhood);
+		b.set("description",description);
+		b.set("price",price);
+		b.set("operation",operation);
+		b.set("owner_id",id_owner);
+		
+		b.saveIt();
+		
+		return b.getInteger("id");
+    }
+    
+    public static boolean modify (
+		int id,
+		String type, 
+		String city,
+		String street,
+		String neighborhood,
+		String description,
+		int price,
+		String operation,
+		int id_owner
+    ){
+		Building b = new Building();
+		b = b.findById(id);
+		
+		if (b == null){
+			throw new IllegalArgumentException("Ingreso un ID de BUILDING no válido.");
+		}
+		
+		if (b.getInteger("owner_id") != id_owner){
+			Owner o = new Owner();
+			o = o.findById(id_owner);
 			
-			if (r != null){
-				if (add){
-					o.add(r);
-				}else{
-					o.remove(r);
-				}
-				return true;
-			}else{
-				return false;
+			if (o == null){
+				throw new IllegalArgumentException("Ingreso un ID de Owner no válido.");
 			}
-		}else{
-			return false;
-		}	
-	}
- 
-	public static boolean addRE(int id, int r_id){
-		return Owners.addRemoveRE(id,r_id,true);
-	}
-	
-	public static boolean deleteRE(int id, int r_id){
-		return Owners.addRemoveRE(id,r_id,false);
-	}
-	
+			
+			b.set("owner_id",id_owner);
+		}
+		
+		b.set("type",type);
+		b.set("city",city);
+		b.set("street",street);
+		b.set("neighborhood",neighborhood);
+		b.set("description",description);
+		b.set("price",price);
+		b.set("operation",operation);
+		
+		return b.saveIt();
+    }
+
+    public static boolean delete(int id){
+		Building b = new Building();
+		b = b.findById(id);
+		
+		System.out.println("ELIMINANDO: "+id);
+		
+		if (b == null){
+			throw new IllegalArgumentException("Ingreso un ID de BUILDING no válido:"+id);
+		}
+		
+		return b.delete();		
+    }
+    
 }
