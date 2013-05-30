@@ -15,7 +15,8 @@ import org.slf4j.LoggerFactory;
 	BuildingSpec.class, 
 	OwnerSpec.class,
 	RealEstateSpec.class,
-	OwnersRealEstatesSpec.class
+	OwnersRealEstatesSpec.class,
+	ABMTest.class
 })
 public class TestSuite {
 }

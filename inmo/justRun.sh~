@@ -1,0 +1,4 @@
+clear
+#!/bin/bash
+echo "*******************  EXECUTING PROGRAM******************************************"
+java -cp $CLASSPATH -Dactivejdbc.log com.unrc.app.Inmo
