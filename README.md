@@ -1,4 +1,4 @@
-# PROYECT 
+# PROJECT 
     
     Analisis y Diseño de Sistemas (3303) - Proyecto Integrador
 
