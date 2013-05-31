@@ -42,8 +42,6 @@ public class OwnerSpec{
         owner.set("street", "marcelo t");
         owner.set("city","atlantis");
 		owner.set("email","algo@algo.com");
-
-		System.out.println("\n\n"+owner.toString()+"\n\n");
 		
         //all is good:
         the(owner).shouldBe("valid");
