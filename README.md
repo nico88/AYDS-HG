@@ -1,6 +1,3 @@
-# humanstxt.org/
-# The humans responsible & technology colophon
-
 # PROYECT 
     
     Analisis y Diseño de Sistemas (3303) - Proyecto Integrador
@@ -20,4 +17,4 @@
     Java, Maven, MySQL
     ActiveJDBC, Spark
     Geany, Ubuntu ;)
-
+	humanstxt.org
