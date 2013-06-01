@@ -16,5 +16,7 @@
 
     Java, Maven, MySQL
     ActiveJDBC, Spark
+    jQuery, jQueryUI, HTML5, CSS3
     Geany, Ubuntu ;)
-	humanstxt.org
+    humanstxt.org
+

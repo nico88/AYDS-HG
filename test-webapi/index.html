@@ -1,0 +1,39 @@
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Inmo Web API Test</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+		<link href="css/south-street/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+		<link href="css/custom.css" rel="stylesheet">
+    </head>
+<body>
+	<h1 id="titulo"><span>Inmo Web API Test</span></h1>
+	<div id="tabs">
+		<ul>
+			<li><a href="#tabs-ow">Owners</a></li>
+			<li><a href="#tabs-rs">Real States</a></li>
+		</ul>
+		<div id="tabs-ow">
+			<form action="/owners" method="get">
+				<label for="city">Ciudad: </label><input type="text" name="city" />
+				<input type="submit" value="enviar"/>
+			</form>
+			<div class="resoult"></div>  
+		</div>
+		<div id="tabs-rs">
+			<form action="/real-estates" method="get">
+				<label for="city">Ciudad: </label><input type="text" name="city">
+				<input type="submit" value="enviar">
+			</form>
+			<div class="resoult"></div>
+		</div>
+	</div>
+		
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery-ui-1.10.3.custom.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>

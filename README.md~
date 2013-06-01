@@ -1,7 +1,4 @@
-# humanstxt.org/
-# The humans responsible & technology colophon
-
-# PROYECT 
+# PROJECT 
     
     Analisis y Diseño de Sistemas (3303) - Proyecto Integrador
 
@@ -17,5 +14,7 @@
 
 # TECHNOLOGY COLOPHON
 
-    HTML5, CSS3
-    Normalize.css, jQuery, Modernizr
+    Java, Maven, MySQL
+    ActiveJDBC, Spark
+    Geany, Ubuntu ;)
+	humanstxt.org
