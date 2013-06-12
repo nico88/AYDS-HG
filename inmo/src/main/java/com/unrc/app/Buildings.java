@@ -4,8 +4,7 @@ import com.unrc.app.models.Building;
 import com.unrc.app.models.Owner;
 
 import org.javalite.activejdbc.Base;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.javalite.activejdbc.LazyList;
 
 public class Buildings {
 	
@@ -94,4 +93,51 @@ public class Buildings {
 		return b.delete();		
     }
     
+    public static String getBuildings(
+		String[] type,
+		String city,
+		String pMin,
+		String pMax
+	)
+    {
+		//Buscar los Buildings que sean de algun type, esten en city, y su costo sea entre pMin y pMax
+		
+		String where = "";
+
+		if (type.length > 0){
+			where = "(";
+			int i;
+			for (i=0; i<type.length; i++){
+				if (type[i] != ""){
+					if (i>0){where = where + " OR ";}
+					where = where + "type='"+type[i]+"'";
+				}
+			}
+			if (where == "("){where = "";}
+			else{where = where + ") ";}
+		}
+		
+		if (city != ""){
+			if (where != ""){where = where + " AND "; }
+			where = where + "city='"+city+"'";
+		}
+
+		if (pMin != ""){
+			if (where != ""){where = where + " AND "; }
+			where = where + "price>="+pMin;
+		}
+
+		if (pMax != ""){
+			if (where != ""){where = where + " AND "; }
+			where = where + "price<="+pMax;
+		}
+				
+		LazyList<Building> buildingList = Building.where(where).include(Owner.class);
+		
+		return buildingList.toJson(true);//,"id","operation","price","description","street","neighborhood","type","city");
+    }      
+    
+    public static String getBuildingTypes(){
+		return "[{\"id\":\"land\",\"name\":\"Terrenos\"},{\"id\":\"farm\",\"name\":\"Campos\"},{\"id\":\"house\",\"name\":\"Casas\"},{\"id\":\"apartment\",\"name\":\"Departamentos\"},{\"id\":\"office\",\"name\":\"Oficinas\"},{\"id\":\"garage\",\"name\":\"Cochera\"}]";
+	}
 }
