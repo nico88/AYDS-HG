@@ -52,9 +52,18 @@ public class ABMTest {
 		System.out.println("Modificar OWNER: OK->" + b);
 		
 		Owners.delete(id);
-		
-		//Owners.modify(1000000,"John3","Doe3","rio cuarto","marcelo t","palazzo","algo@algo.com");
 
+		try{
+			Owners.modify(1000000,"John3","Doe3","rio cuarto","marcelo t","palazzo","algo@algo.com");
+		}catch(Exception e){
+			System.out.println("Modificar OWNER inexistente: Genero Excepcion OK");
+		}
+
+		try{
+			Owners.add("John2","Doe2","","marcelo t","atlantis","algo@algo.com");
+		}catch(Exception e){
+			System.out.println("Agregar OWNER invalido: Genero Excepcion OK");
+		}
 
 //TEST ABM RealEstate
 		System.out.println("\n\nTEST ABM RealEstate");
@@ -67,8 +76,17 @@ public class ABMTest {
 		
 		RealEstates.delete(id);
 		
-		//RealEstates.modify(10000,"The Name","The City","The Street","The Neighborhood","el@email.com","ignacioherrero.net");
+		try{
+			RealEstates.modify(10000,"The Name","The City","The Street","The Neighborhood","el@email.com","ignacioherrero.net");
+		}catch(Exception e){
+			System.out.println("Modificar REAL ESTATE inexistente: Genero Excepcion OK");
+		}
 
+		try{
+			RealEstates.add("John","","rivadavia","","algo@algod.com","");
+		}catch(Exception e){
+			System.out.println("Modificar REAL ESTATE invalido: Genero Excepcion OK");
+		}
 
 //TEST OWNER + REAL ESTATE: Relacion Many to Many
 		System.out.println("\n\nTEST OWNER + REAL ESTATE: Relacion Many to Many");
@@ -94,15 +112,25 @@ public class ABMTest {
 		System.out.println("\n\nTEST ABM Building");
 		
 		id = Buildings.add("land","rio cuarto","rivadavia","fdfdgdfg","algo@algod.com",5000,"rent",5);
-		System.out.println("Agregar Building: ID->" + id);
+		System.out.println("Agregar BUILDING: ID->" + id);
 		
 		b = Buildings.modify(id,"land","rio cuarto","rivadavia","fdfdgdfg","algo@algod.com",5000,"rent",3);
-		System.out.println("Modificar Building: OK->" + b); 
+		System.out.println("Modificar BUILDING: OK->" + b); 
 		
 		b = Buildings.delete(id);
-		System.out.println("Eliminar Building: OK->" + b); 
+		System.out.println("Eliminar BUILDING: OK->" + b); 
 
-		//Buildings.modify(100000,"land","rio cuarto","rivadavia","fdfdgdfg","algo@algod.com",5000,"rent",3); 
+		try{
+			Buildings.modify(100000,"land","rio cuarto","rivadavia","fdfdgdfg","algo@algod.com",5000,"rent",3); 
+		}catch(Exception e){
+			System.out.println("Modificar BUILDING inexistente: Genero Excepcion OK");
+		}
+
+		try{
+			Buildings.add("tipo invalido","rio cuarto","rivadavia","fdfdgdfg","algo@algod.com",5000,"rent",5);
+		}catch(Exception e){
+			System.out.println("Modificar BUILDING invalido: Genero Excepcion OK");
+		}
 		
 		System.out.println("\n\n-> END Test ABM\n\n");
     }

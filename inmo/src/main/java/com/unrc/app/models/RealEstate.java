@@ -20,11 +20,6 @@ public class RealEstate extends Model {
 	validatePresenceOf("email");
 	validateEmailOf("email");
 
-/*	
-   if (website != ""){
-		validateRegexpOf("website", "^(http\://|https\://)+[\w][\w.-]+\\.[A-Z]{2,3}$");
-    }
-*/
 
   }
 }

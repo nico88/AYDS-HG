@@ -8,6 +8,25 @@
 		}
 		return ret;
 	}			
+
+	function loadSelect(url,select,msgErr,toName){
+		$.ajax({
+			url: "http://localhost:4567"+url,
+			type: "GET",
+			jsonpCallback: 'jsonCallback',
+			contentType: "application/json",
+			dataType: 'jsonp',
+			success: function(json) {
+				$(json).each(function(i,obj){
+					$(select).append('<option value="'+obj.id+'">'+toName(obj)+'</option>');
+				});
+			},
+			error: function(e) {
+				console.log(e);
+			   alert(msgErr);
+			}
+		});				
+	}
 	
 	$(document).ready(function () {
 		$('h1').addClass('ui-widget ui-widget-header ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ui-helper-clearfix');
@@ -18,10 +37,21 @@
 		
 		$("form input[type=submit]").button();
 		$("form input[type=text]").addClass('ui-widget ui-corner-all');
+
+		//Cargo las categorías de buildings
+		loadSelect(
+			"/buildingtypes",
+			"#tabs-bl form select[name=type]",
+			"Ups... no se pudieron cargar los tipos de Buildings",
+			function(obj){return obj.name}
+		);
 	
 		$("form").submit(function(e){
 			e.preventDefault();
-			var form = $(e.currentTarget)
+			var form = $(e.currentTarget);
+			
+			$("input, select",form).attr("readonly","readonly");
+			$("input[type=submit]",form).button("disable");			
 			
 			$.ajax({
 				url: "http://localhost:4567"+form.attr("action"),
@@ -30,6 +60,15 @@
 				jsonpCallback: 'jsonCallback',
 				contentType: "application/json",
 				dataType: 'jsonp',
+				complete: function(){
+					$("input, select",form).removeAttr("readonly");
+					$("input[type=submit]",form).button("enable");				
+
+					$(form)[0].reset();
+
+					formWrap = form.parent().attr('id')
+					if ($.isFunction(formCallBacks[formWrap])) formCallBacks[formWrap]();
+				},				
 				success: function(json) {
 				   $('.resoult',form.parent()).html(json2html(json));
 				},

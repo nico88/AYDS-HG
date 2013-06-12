@@ -4,8 +4,7 @@ import com.unrc.app.models.RealEstate;
 import com.unrc.app.models.Owner;
 
 import org.javalite.activejdbc.Base;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.javalite.activejdbc.LazyList;
 
 public class RealEstates {
     public static int add(
@@ -73,6 +72,16 @@ public class RealEstates {
 	
 	public static boolean deleteOW(int id, int o_id){
 		return Owners.deleteRE(o_id, id);
+	}
+	
+	public static String getRealEstatesByCity(String city){
+		//Busco los RealEstates
+		String where = "";
+		if (city != ""){where = "city='"+city+"'";}
+		
+		LazyList<RealEstate> realestateList = RealEstate.where(where);//.include(Owner.class);;
+			
+		return realestateList.toJson(false, "id","name","street","neighborhood","email","website");	
 	}
 
 }
