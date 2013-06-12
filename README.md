@@ -10,7 +10,7 @@
 # THANKS
 
     Google, StackOverflow and the other gods.
-    And the demigods: "Los profes del taller".
+    
 
 # TECHNOLOGY COLOPHON
 
