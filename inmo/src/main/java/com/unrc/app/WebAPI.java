@@ -13,24 +13,22 @@ import com.unrc.app.Owners;
 
 
 public class WebAPI {
-
-	public WebAPI(){
-		Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/inmoapp_development", "root", "");	
-		System.out.println("---> Se conecto a la base de datos."+Base.connection()+"\n");
+	private void connect(){
+		if (!Base.hasConnection()){
+			Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/inmoapp_development", "root", "");	
+			System.out.println("---> Se conecto a la base de datos."+Base.connection()+"\n");
+		}
 	}
 	
-	public void end(){
-		Base.close();
-		System.out.println("---> Cerro la conexion con la base de datos.");
-	}
-
     public String getOwners(String city)
     {
+		connect();
 		return Owners.getOwnersByCity(city);
     }
 
     public String getRealEstates(String city)
     {
+		connect();
 		return RealEstates.getRealEstatesByCity(city);
     }
     
@@ -40,11 +38,13 @@ public class WebAPI {
 		String pMin,
 		String pMax
 	){
+		connect();
 		return Buildings.getBuildings(type.split(","),city,pMin,pMax);
 	}    
 
     public String getBuildingTypes()
     {
+		connect();
 		return Buildings.getBuildingTypes();
     }
 
@@ -57,7 +57,8 @@ public class WebAPI {
 		String email)
     {
 		int id;
-
+		
+		connect();
 		try{
 			id = Owners.add(first_name, last_name, city, street, neighborhood, email);
 		}catch(Exception e){
@@ -78,6 +79,7 @@ public class WebAPI {
     {
 		int id;
 
+		connect();
 		try{
 			id = RealEstates.add(name, city, street, neighborhood, email, website);
 		}catch(Exception e){

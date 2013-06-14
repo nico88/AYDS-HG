@@ -10,29 +10,29 @@ import static spark.Spark.*;
 import spark.*;
 
 public class Inmo {
+	public static WebAPI api = new WebAPI();
+	
+	private static String makeJSONP(String fnCallback, String json){
+		if (fnCallback != null && fnCallback != ""){
+			return fnCallback+"("+json+")";
+		}else{
+			return json;
+		}
+	}
+	
     public static void main( String[] args ){
 			
       get(new Route("/owners") {
          @Override
          public Object handle(Request request, Response response) {
-			WebAPI api = new WebAPI();
-			
-            String aux = api.getOwners(request.queryParams("city"));
-            api.end();
-            
-            return "jsonCallback("+aux+")";
+            return makeJSONP(request.queryParams("callback"), api.getOwners(request.queryParams("city")));
          }
       });
 
       get(new Route("/real-estates") {
          @Override
          public Object handle(Request request, Response response) {
-			WebAPI api = new WebAPI();
-			
-            String aux = api.getRealEstates(request.queryParams("city"));
-            api.end();
-            
-            return "jsonCallback("+aux+")";
+            return makeJSONP(request.queryParams("callback"),api.getRealEstates(request.queryParams("city")));
          }
       });
 
@@ -42,8 +42,7 @@ public class Inmo {
             //check type is land|farm|house|apartment|office|garage
             //check city is [:alpha:]+
             //check pmax and pmin is [:digit:]+
-            
-			WebAPI api = new WebAPI();
+			
 			
             String aux = api.getBuildings(
 				request.queryParams("type"),
@@ -51,41 +50,29 @@ public class Inmo {
 				request.queryParams("pMin"),
 				request.queryParams("pMax")
 			);
-
-            api.end();
             
-            return "jsonCallback("+aux+")";
+            return makeJSONP(request.queryParams("callback"),aux);
          }
       });
 
       get(new Route("/houseandapartments") {
          @Override
          public Object handle(Request request, Response response) {
-			WebAPI api = new WebAPI();
 			
             String aux = api.getBuildings("house,appartment",
 				request.queryParams("city"),
 				request.queryParams("pMin"),
 				request.queryParams("pMax")
 			);
-
-            api.end();
             
-            return "jsonCallback("+aux+")";
+            return makeJSONP(request.queryParams("callback"),aux);
          }
       });
 
       get(new Route("/buildingtypes") {
          @Override
          public Object handle(Request request, Response response) {
-			
-			WebAPI api = new WebAPI();
-			
-            String aux = api.getBuildingTypes();
-
-            api.end();
-            
-            return "jsonCallback("+aux+")";
+            return makeJSONP(request.queryParams("callback"),api.getBuildingTypes());
          }
       });
 
@@ -99,8 +86,6 @@ public class Inmo {
          @Override
          public Object handle(Request request, Response response) {
 			
-			WebAPI api = new WebAPI();
-			
             String aux = api.addOwner(
 				request.queryParams("first_name"),
 				request.queryParams("last_name"),
@@ -109,10 +94,8 @@ public class Inmo {
 				request.queryParams("neighborhood"),
 				request.queryParams("email")
             );
-
-            api.end();
             
-            return "jsonCallback("+aux+")";
+            return makeJSONP(request.queryParams("callback"),aux);
          }
       });
       
@@ -120,8 +103,6 @@ public class Inmo {
       get(new Route("/post/realestates") {
          @Override
          public Object handle(Request request, Response response) {
-			
-			WebAPI api = new WebAPI();
 			
             String aux = api.addRealEstate(
 				request.queryParams("name"),
@@ -131,10 +112,8 @@ public class Inmo {
 				request.queryParams("street"),
 				request.queryParams("neighborhood")
             );
-
-            api.end();
             
-            return "jsonCallback("+aux+")";
+            return makeJSONP(request.queryParams("callback"),aux);
          }
       });      
       

@@ -13,7 +13,6 @@
 		$.ajax({
 			url: "http://localhost:4567"+url,
 			type: "GET",
-			jsonpCallback: 'jsonCallback',
 			contentType: "application/json",
 			dataType: 'jsonp',
 			success: function(json) {
@@ -57,7 +56,6 @@
 				url: "http://localhost:4567"+form.attr("action"),
 				type: form.attr("method").toUpperCase(),
 				data: form.serialize(),
-				jsonpCallback: 'jsonCallback',
 				contentType: "application/json",
 				dataType: 'jsonp',
 				complete: function(){
@@ -66,8 +64,8 @@
 
 					$(form)[0].reset();
 
-					formWrap = form.parent().attr('id')
-					if ($.isFunction(formCallBacks[formWrap])) formCallBacks[formWrap]();
+					//formWrap = form.parent().attr('id')
+					//if ($.isFunction(formCallBacks[formWrap])) formCallBacks[formWrap]();
 				},				
 				success: function(json) {
 				   $('.resoult',form.parent()).html(json2html(json));
