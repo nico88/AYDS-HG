@@ -115,9 +115,21 @@ public class Inmo {
             
             return makeJSONP(request.queryParams("callback"),aux);
          }
+      });
+      
+      
+      get(new Route("/post/owner-realestates") {
+         @Override
+         public Object handle(Request request, Response response) {
+			
+            String aux = api.bindOwnerRealEstate(
+				request.queryParams("owner"),
+				request.queryParams("realestate")
+            );
+            
+            return makeJSONP(request.queryParams("callback"),aux);
+         }
       });      
-      
-      
 
     }
 }

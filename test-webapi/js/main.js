@@ -9,7 +9,8 @@
 		return ret;
 	}			
 
-	function loadSelect(url,select,msgErr,toName){
+	function loadSelect(url,select,msgErr,fnToName){
+		$(select).html('<option value="">Seleccione una opción</option>');
 		$.ajax({
 			url: "http://localhost:4567"+url,
 			type: "GET",
@@ -17,7 +18,7 @@
 			dataType: 'jsonp',
 			success: function(json) {
 				$(json).each(function(i,obj){
-					$(select).append('<option value="'+obj.id+'">'+toName(obj)+'</option>');
+					$(select).append('<option value="'+obj.id+'">'+fnToName(obj)+'</option>');
 				});
 			},
 			error: function(e) {
@@ -25,6 +26,27 @@
 			   alert(msgErr);
 			}
 		});				
+	}
+
+	var formCallBacks = {
+		"tabs-addow" : function(){
+			//Cargo los owners
+			loadSelect(
+				"/owners?city=",
+				"#tabs-addrs-ow form select[name=owner]",
+				"Ups... no se pudieron cargar los Propietarios",
+				function(obj){return obj.last_name + ", " + obj.first_name}
+			);
+		},
+		"tabs-addrs": function(){
+			//Cargo las Inmobiliarias
+			loadSelect(
+				"/real-estates?city=",
+				"#tabs-addrs-ow form select[name=realestate]",
+				"Ups... no se pudieron cargar las Inmobiliarias",
+				function(obj){return obj.name}
+			);
+		}
 	}
 	
 	$(document).ready(function () {
@@ -44,6 +66,9 @@
 			"Ups... no se pudieron cargar los tipos de Buildings",
 			function(obj){return obj.name}
 		);
+
+		formCallBacks["tabs-addrs"]();
+		formCallBacks["tabs-addow"]();
 	
 		$("form").submit(function(e){
 			e.preventDefault();
@@ -63,9 +88,10 @@
 					$("input[type=submit]",form).button("enable");				
 
 					$(form)[0].reset();
-
-					//formWrap = form.parent().attr('id')
-					//if ($.isFunction(formCallBacks[formWrap])) formCallBacks[formWrap]();
+					
+					//Si hay funciones de callBack definidas, las ejecuto
+					formWrap = form.parent().attr('id')
+					if ($.isFunction(formCallBacks[formWrap])) formCallBacks[formWrap]();
 				},				
 				success: function(json) {
 				   $('.resoult',form.parent()).html(json2html(json));

@@ -54,6 +54,8 @@ CREATE TABLE owners_real_estates(
   owner_id int(11),
   real_estate_id int(11),
   
+  PRIMARY KEY (owner_id, real_estate_id),
+  
   INDEX owner (owner_id),
   FOREIGN KEY (owner_id) REFERENCES owners(id) ON DELETE CASCADE,
   

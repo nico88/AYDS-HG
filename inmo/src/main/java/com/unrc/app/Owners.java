@@ -78,18 +78,24 @@ public class Owners {
 	private static boolean addRemoveRE(int id, int r_id, boolean add){
 		Owner o = new Owner();
 		o = o.findById(id);
-				
+		
 		if (o != null){
 			RealEstate r = new RealEstate();
 			r = r.findById(r_id);
 			
 			if (r != null){
-				if (add){
-					o.add(r);
-				}else{
-					o.remove(r);
-				}
-				return true;
+				Boolean resultado = true;
+				try{
+					if (add){
+						o.add(r);
+					}else{
+						o.remove(r);
+					}
+				}catch(Exception e){
+					System.out.println(e);
+					resultado = false;
+				}				
+				return resultado;
 			}else{
 				//NO ENCONTRO EL REAL ESTATE
 				return false;

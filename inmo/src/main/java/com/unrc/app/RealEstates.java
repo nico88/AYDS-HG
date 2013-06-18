@@ -79,7 +79,7 @@ public class RealEstates {
 		String where = "";
 		if (city != ""){where = "city='"+city+"'";}
 		
-		LazyList<RealEstate> realestateList = RealEstate.where(where);//.include(Owner.class);;
+		LazyList<RealEstate> realestateList = RealEstate.where(where).include(Owner.class);
 			
 		return realestateList.toJson(false, "id","name","street","neighborhood","email","website");	
 	}

@@ -18,6 +18,7 @@
 			<li><a href="#tabs-bl">Propiedades</a></li>
 			<li><a href="#tabs-addow">Agregar Propietario</a></li>
 			<li><a href="#tabs-addrs">Agregar Inmobiliaria</a></li>
+			<li><a href="#tabs-addrs-ow">Rel. Inmob-Prop</a></li>
 		</ul>
 		
 		<div id="tabs-ow">
@@ -41,7 +42,7 @@
 		<div id="tabs-bl">
 			<h1>Consultar Propiedades</h1>
 			<form action="/buildings" method="get">
-				<fieldset><label for="type">Tipo: </label><select name="type"><option value="">Seleccione una opción</option></select></fieldset>
+				<fieldset><label for="type">Tipo: </label><select name="type"></select></fieldset>
 				<fieldset><label for="city">Ciudad: </label><input type="text" name="city"></fieldset>
 				<fieldset><label for="pMin">Precio Minimo: </label><input type="text" name="pMin"></fieldset>
 				<fieldset><label for="pMax">Precio Máximo: </label><input type="text" name="pMax"></fieldset>
@@ -78,7 +79,17 @@
 				<fieldset class="boton"><input type="submit" value="enviar"/></fieldset>
 			</form>
 			<div class="resoult"></div>  
-		</div>		
+		</div>
+		
+		<div id="tabs-addrs-ow">
+			<h1>Agregar Relacion Inmueble - Propietario</h1>
+			<form action="/post/owner-realestates" method="get">
+				<fieldset><label for="owner">Propietario: </label><select name="owner"></select></fieldset>
+				<fieldset><label for="realestate">Inmueble: </label><select name="realestate"></select></fieldset>
+				<fieldset class="boton"><input type="submit" value="enviar"/></fieldset>
+			</form>
+			<div class="resoult"></div>  			
+		</div>
 
 	</div>
 		

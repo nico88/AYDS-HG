@@ -87,5 +87,15 @@ public class WebAPI {
 		}
 		
 		return "{\"msg\":\"Inserción OK (Nuevo ID:"+id+")\"}";
-    }    
+    }   
+    
+    public String bindOwnerRealEstate(String owner, String realEstate)
+    {
+		connect();
+		if (Owners.addRE(Integer.parseInt(owner), Integer.parseInt(realEstate))){
+			return "{\"msg\":\"Binding OK\"}";
+		}else{
+			return "{\"msg\":\"No se pudo hacer el Binding\"}";
+		}
+    }        
 }
