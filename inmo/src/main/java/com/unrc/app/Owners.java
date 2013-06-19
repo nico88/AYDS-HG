@@ -5,12 +5,8 @@ import java.util.List;
 import com.unrc.app.models.RealEstate;
 import com.unrc.app.models.Owner;
 
-import org.javalite.activejdbc.Base;
+//import org.javalite.activejdbc.Base;
 import org.javalite.activejdbc.LazyList;
-/*
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-*/
 
 public class Owners {
     public static int add(

@@ -3,7 +3,7 @@ package com.unrc.app;
 import com.unrc.app.models.Building;
 import com.unrc.app.models.Owner;
 
-import org.javalite.activejdbc.Base;
+//import org.javalite.activejdbc.Base;
 import org.javalite.activejdbc.LazyList;
 
 public class Buildings {

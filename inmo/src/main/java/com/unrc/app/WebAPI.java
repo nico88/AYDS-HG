@@ -92,10 +92,14 @@ public class WebAPI {
     public String bindOwnerRealEstate(String owner, String realEstate)
     {
 		connect();
-		if (Owners.addRE(Integer.parseInt(owner), Integer.parseInt(realEstate))){
-			return "{\"msg\":\"Binding OK\"}";
-		}else{
-			return "{\"msg\":\"No se pudo hacer el Binding\"}";
+		try{
+			if (Owners.addRE(Integer.parseInt(owner), Integer.parseInt(realEstate))){
+				return "{\"msg\":\"Binding OK\"}";
+			}else{
+				return "{\"msg\":\"No se pudo hacer el Binding\"}";
+			}
+		}catch(Exception e){
+			return "{\"msg\":\"No se pudo hacer el Binding. Datos no válidos.\"}";
 		}
     }        
 }
