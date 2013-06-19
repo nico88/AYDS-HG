@@ -13,26 +13,26 @@ import com.unrc.app.Owners;
 
 
 public class WebAPI {
-	private void connect(){
+	private static void connect(){
 		if (!Base.hasConnection()){
 			Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/inmoapp_development", "root", "");	
 			System.out.println("---> Se conecto a la base de datos."+Base.connection()+"\n");
 		}
 	}
 	
-    public String getOwners(String city)
+    public static String getOwners(String city)
     {
 		connect();
 		return Owners.getOwnersByCity(city);
     }
 
-    public String getRealEstates(String city)
+    public static String getRealEstates(String city)
     {
 		connect();
 		return RealEstates.getRealEstatesByCity(city);
     }
     
-    public String getBuildings(
+    public static String getBuildings(
 		String type,
 		String city,
 		String pMin,
@@ -42,13 +42,13 @@ public class WebAPI {
 		return Buildings.getBuildings(type.split(","),city,pMin,pMax);
 	}    
 
-    public String getBuildingTypes()
+    public static String getBuildingTypes()
     {
 		connect();
 		return Buildings.getBuildingTypes();
     }
 
-    public String addOwner(		
+    public static String addOwner(		
 		String first_name, 
 		String last_name, 
 		String city, 
@@ -69,7 +69,7 @@ public class WebAPI {
     }
 
 
-    public String addRealEstate(		
+    public static String addRealEstate(		
 		String name, 
 		String website, 
 		String email,
@@ -89,7 +89,7 @@ public class WebAPI {
 		return "{\"msg\":\"Inserción OK (Nuevo ID:"+id+")\"}";
     }   
     
-    public String bindOwnerRealEstate(String owner, String realEstate)
+    public static String bindOwnerRealEstate(String owner, String realEstate)
     {
 		connect();
 		try{
