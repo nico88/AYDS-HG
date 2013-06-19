@@ -51,10 +51,13 @@
 	
 	$(document).ready(function () {
 		$('h1').addClass('ui-widget ui-widget-header ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ui-helper-clearfix');
-		$('#tabs').tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
-		$('#tabs .ui-tabs-nav ').tabs().addClass( "ui-corner-tl ui-corner-bl" );
-		$('#tabs .ui-tabs-nav').tabs().removeClass( "ui-corner-all" );
-		$( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+		$('#tabs').tabs({
+			beforeActivate: function( event, ui ) {$(".resoult",ui.newPanel).html("")}
+		});
+		$('#tabs').addClass("ui-tabs-vertical ui-helper-clearfix");
+		$('#tabs .ui-tabs-nav ').addClass("ui-corner-tl ui-corner-bl");
+		$('#tabs .ui-tabs-nav').removeClass("ui-corner-all");
+		$('#tabs li').removeClass("ui-corner-top" ).addClass("ui-corner-left");
 		
 		$("form input[type=submit]").button();
 		$("form input[type=text]").addClass('ui-widget ui-corner-all');
