@@ -1,7 +1,7 @@
 package com.unrc.app;
 
 //Modelo ActiveJDBC
-import com.unrc.app.models.*;
+//import com.unrc.app.models.*;
 
 //ActiveJDBC
 import org.javalite.activejdbc.Base;
